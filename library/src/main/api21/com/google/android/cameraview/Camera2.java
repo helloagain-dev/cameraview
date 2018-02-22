@@ -551,7 +551,7 @@ class Camera2 extends CameraViewImpl implements MediaRecorder.OnInfoListener, Me
         if (!mIsScanning) {
             mImageFormat = ImageFormat.JPEG;
         } else {
-            mImageFormat = ImageFormat.YUV_420_888;
+            mImageFormat = ImageFormat.NV21;
         }
         if (mCaptureSession != null) {
             mCaptureSession.close();
@@ -683,7 +683,7 @@ class Camera2 extends CameraViewImpl implements MediaRecorder.OnInfoListener, Me
         }
         Size largest = mPreviewSizes.sizes(mAspectRatio).last();
         mScanImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
-                ImageFormat.YUV_420_888, 1);
+                ImageFormat.NV21, 1);
         mScanImageReader.setOnImageAvailableListener(mOnImageAvailableListener, null);
     }
 
@@ -1083,7 +1083,7 @@ class Camera2 extends CameraViewImpl implements MediaRecorder.OnInfoListener, Me
             updateAutoFocus();
             updateFlash();
             if (mIsScanning) {
-                mImageFormat = ImageFormat.YUV_420_888;
+                mImageFormat = ImageFormat.NV21;
                 startCaptureSession();
             } else {
                 mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
